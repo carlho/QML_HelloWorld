@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Cell.qml</file>
+        <file>Node.qml</file>
+        <file>jquery/jquery-ui-1.11.4.custom/external/jquery/jquery.js</file>
     </qresource>
 </RCC>

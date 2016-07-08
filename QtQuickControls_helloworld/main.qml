@@ -1,5 +1,6 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
+//import "qrc:/jquery/jquery-ui-1.11.4.custom/external/jquery/jquery.js" as JQ
 
 ApplicationWindow {
     visible: true
@@ -23,14 +24,17 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id:page
+        id:drawArea
         width: parent.width*3/4
         height: parent.height
         color: "lightgrey"
 
+
+
         MouseArea {
             id: mouseAreaRect
             anchors.fill: parent
+            /*
             hoverEnabled: true
             onEntered:
             {
@@ -41,12 +45,27 @@ ApplicationWindow {
             {
                 parent.color = "lightgrey"
                 helloText.text = "Hello world!"
-            }
+            }*/
+/*
+            onDoubleClicked:{
+                JQ.alert("welcome")
+            }*/
 
             // Add node
             onClicked:
             {
-                parent.color = "blue"
+                var node = Qt.createComponent("Node.qml");
+                if (node.status == Component.Ready) {
+
+                        var dynamicObject = node.createObject(drawArea);
+                        if (dynamicObject == null) {
+                            console.log("error creating block");
+                            console.log(component.errorString());
+                            return false;
+                        }
+                        dynamicObject.xPos = mouseX
+                        dynamicObject.yPos = mouseY
+                }
             }
         }
 
@@ -54,7 +73,7 @@ ApplicationWindow {
             id: helloText
             text: "Hello world!"
             y: 30
-            anchors.horizontalCenter: page.horizontalCenter
+            anchors.horizontalCenter: drawArea.horizontalCenter
             font.pointSize: 24; font.bold: true
 
             MouseArea { id: mouseArea; anchors.fill: parent }
@@ -77,7 +96,7 @@ ApplicationWindow {
 
         Grid {
             id: colorPicker
-            x: 4; anchors.bottom: page.bottom; anchors.bottomMargin: 4
+            x: 4; anchors.bottom: drawArea.bottom; anchors.bottomMargin: 4
             rows: 2; columns: 3; spacing: 3
 
             Cell { cellColor: "red"; onClicked: helloText.color = cellColor }
@@ -89,5 +108,20 @@ ApplicationWindow {
         }
 
 
+    }
+
+
+    Rectangle {
+        id: right
+        x: parent.width*3/4
+        width: parent.width/4
+        height: parent.height
+        
+        color: "darkgrey"
+
+
+        MouseArea{
+            anchors.fill: parent
+        }
     }
 }
