@@ -1,8 +1,11 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
-//import "qrc:/jquery/jquery-ui-1.11.4.custom/external/jquery/jquery.js" as JQ
+import QtQuick.Window 2.0 // Not sure what this is, recommended as debug for jQuery on SE. /CH
+import "qrc:/jquery/jquery-ui-1.11.4.custom/external/jquery/jquery.js" as JQ
+import Hello 1.0
 
 ApplicationWindow {
+    id: mainWindow
     visible: true
     width: 640
     height: 480
@@ -29,13 +32,19 @@ ApplicationWindow {
         height: parent.height
         color: "lightgrey"
 
-
+        QtWr_HelloCppWorld
+        {
+            id: cppObject
+            name: "Hello C++ World"
+        }
 
         MouseArea {
             id: mouseAreaRect
             anchors.fill: parent
+
             /*
             hoverEnabled: true
+
             onEntered:
             {
                 parent.color = "darkgrey"
@@ -45,11 +54,15 @@ ApplicationWindow {
             {
                 parent.color = "lightgrey"
                 helloText.text = "Hello world!"
-            }*/
-/*
-            onDoubleClicked:{
-                JQ.alert("welcome")
-            }*/
+            }
+            */
+
+            onPressAndHold:{
+                helloText.text = cppObject.name
+            }
+
+            onReleased: {helloText.text = "Hello world!"}
+
 
             // Add node
             onClicked:
