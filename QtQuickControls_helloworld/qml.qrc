@@ -4,5 +4,14 @@
         <file>Cell.qml</file>
         <file>Node.qml</file>
         <file>jquery/jquery-ui-1.11.4.custom/external/jquery/jquery.js</file>
+        <file>images/backToWindowIcon.png</file>
+        <file>images/closeIcon.png</file>
+        <file>images/gotoBasicVersion.png</file>
+        <file>images/goToBasicVersionHovered.png</file>
+        <file>images/helpIcon.png</file>
+        <file>images/maximizeIcon.png</file>
+        <file>images/minimizeIcon.png</file>
+        <file>images/resize.png</file>
+        <file>TitleBar.qml</file>
     </qresource>
 </RCC>
