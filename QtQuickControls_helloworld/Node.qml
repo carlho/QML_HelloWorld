@@ -22,7 +22,7 @@ Item {
 
         MouseArea {
             anchors.fill: parent
-            //onClicked: container.clicked(container.cellColor)
+            onClicked: node.clicked()
 
 
             onDoubleClicked: node.destroy()

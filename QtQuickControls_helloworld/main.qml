@@ -30,7 +30,16 @@ ApplicationWindow {
         id:drawArea
         width: parent.width*3/4
         height: parent.height
-        color: "lightgrey"
+        gradient: Gradient{
+            GradientStop{
+                position: 0.0;
+                color: "darkgrey"
+            }
+            GradientStop{
+                position: 1.0;
+                color: "lightgrey"
+            }
+        }
 
         QtWr_HelloCppWorld
         {
@@ -129,8 +138,31 @@ ApplicationWindow {
         x: parent.width*3/4
         width: parent.width/4
         height: parent.height
+
         
         color: "darkgrey"
+
+        Rectangle{
+            id: smallRect
+            width: parent.width/5
+            height: width
+            x: parent.width/2 - width/2
+            y: 10
+            color: "red"
+
+            NumberAnimation on y{
+                from: 10; to: 200
+                duration: 1000
+            }
+
+            MouseArea{
+                anchors.fill: parent
+
+                onClicked: {
+                    parent.y = 10
+                }
+            }
+        }
 
 
         MouseArea{
