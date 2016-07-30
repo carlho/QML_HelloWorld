@@ -13,5 +13,6 @@
         <file>images/minimizeIcon.png</file>
         <file>images/resize.png</file>
         <file>TitleBar.qml</file>
+        <file>pointSketch.js</file>
     </qresource>
 </RCC>

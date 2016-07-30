@@ -2,7 +2,8 @@ import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.3
 import QtQuick.Window 2.0 // Not sure what this is, recommended as debug for jQuery on SE. /CH
-import "qrc:/jquery/jquery-ui-1.11.4.custom/external/jquery/jquery.js" as JQ
+//import "qrc:/jquery/jquery-ui-1.11.4.custom/external/jquery/jquery.js" as JQ
+import "pointSketch.js" as PointSketch
 import Hello 1.0
 
 ApplicationWindow {
@@ -69,7 +70,7 @@ ApplicationWindow {
         }
 
     Rectangle {
-        id:drawArea
+        id: drawArea
         width: parent.width*3/4
         height: parent.height
         gradient: Gradient{
@@ -116,21 +117,11 @@ ApplicationWindow {
 
 
             // Add node
-            onClicked:
-            {
-                var node = Qt.createComponent("Node.qml");
-                if (node.status == Component.Ready) {
-
-                        var dynamicObject = node.createObject(drawArea);
-                        if (dynamicObject == null) {
-                            console.log("error creating block");
-                            console.log(component.errorString());
-                            return false;
-                        }
-                        dynamicObject.xPos = mouseX
-                        dynamicObject.yPos = mouseY
-                }
+            onClicked: {
+                PointSketch.addNode(mouseX, mouseY)
             }
+
+
         }
 
         Text {

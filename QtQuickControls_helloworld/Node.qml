@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Item {
     id: node
-    signal clicked(int xPos, int yPos)
+    signal activated(real xPos, real yPos)
 
     property int xPos: 0
     property int yPos: 0
@@ -15,15 +15,27 @@ Item {
         y: yPos-width/2
         width: parent.width<parent.height?parent.width:parent.height
         height: width
-        color: "darkgrey"
+        color: "black"
         border.color: "black"
         border.width: 1
         radius: width*0.5
 
         MouseArea {
             anchors.fill: parent
-            onClicked: node.clicked()
+            hoverEnabled: true
 
+            onClicked: {
+                activate(node.xPos, node.yPos)
+                //parent.color: "red"
+            }
+
+            onEntered: {
+                parent.color = "black"
+            }
+
+            onExited: {
+                parent.color = "darkgrey"
+            }
 
             onDoubleClicked: node.destroy()
         }
