@@ -2,7 +2,6 @@ import QtQuick 2.0
 
 Item {
     id: node
-    signal activated(real xPos, real yPos)
 
     property int xPos: 0
     property int yPos: 0
@@ -25,8 +24,7 @@ Item {
             hoverEnabled: true
 
             onClicked: {
-                activate(node.xPos, node.yPos)
-                //parent.color: "red"
+                drawArea.doStuffTest(node.xPos, node.yPos);
             }
 
             onEntered: {

@@ -5,6 +5,7 @@ import QtQuick.Window 2.0 // Not sure what this is, recommended as debug for jQu
 //import "qrc:/jquery/jquery-ui-1.11.4.custom/external/jquery/jquery.js" as JQ
 import "pointSketch.js" as PointSketch
 import Hello 1.0
+import CustomGeometry 1.0
 
 ApplicationWindow {
     id: mainWindow
@@ -14,6 +15,7 @@ ApplicationWindow {
     height: 480
     title: qsTr("Hello World")
     flags: Qt.FramelessWindowHint //suppresses the standard windows frame
+
 
     menuBar: MenuBar {
 
@@ -69,7 +71,8 @@ ApplicationWindow {
             }
         }
 
-    Rectangle {
+    Rectangle
+    {
         id: drawArea
         width: parent.width*3/4
         height: parent.height
@@ -84,24 +87,36 @@ ApplicationWindow {
             }
         }
 
+
         QtWr_HelloCppWorld
         {
             id: cppObject
             name: "Hello C++ World"
         }
 
+
+
         MouseArea {
             id: mouseAreaRect
             anchors.fill: parent
 
-            /*
+
             hoverEnabled: true
 
             onEntered:
             {
-                parent.color = "darkgrey"
-                helloText.text = "Entered"
+
             }
+
+            onPositionChanged:
+            {
+                if (PointSketch.creatingElement)
+                {
+                    PointSketch.drawElement(mouseX, mouseY)
+                }
+            }
+
+            /*
             onExited:
             {
                 parent.color = "lightgrey"
@@ -118,10 +133,57 @@ ApplicationWindow {
 
             // Add node
             onClicked: {
+
                 PointSketch.addNode(mouseX, mouseY)
             }
 
 
+        }
+
+        function doStuffTest(x, y){
+            PointSketch.drawElement(x, y)
+        }
+
+        Rectangle{
+            id: bounceRec
+            x: parent.x
+            y: parent.y
+            width: 80
+            height: 80
+
+            MouseArea { id: mouseArea2; anchors.fill: parent }
+
+            states: State
+            {
+                  name: "up2";
+                  when: mouseArea2.pressed == true
+                  PropertyChanges
+                  {
+                      target: bounceRec;
+                      y: bounceRecItem.y-10;
+                      x: bounceRecItem.x+50;
+                      //rotation: 180;
+                      color: "blue"
+                  }
+            }
+
+            transitions: Transition
+            {
+                  from: "";
+                  to: "up2";
+                  //reversible: true
+                  ParallelAnimation
+                  {
+                       NumberAnimation
+                       {
+                           properties: "y,rotation";
+                           duration: 800;
+                           easing.type: Easing.OutElastic
+                       }
+
+                       ColorAnimation { duration: 800 }
+                  }
+            }
         }
 
         Text {
@@ -129,20 +191,40 @@ ApplicationWindow {
             text: "Hello world!"
             y: 30
             anchors.horizontalCenter: drawArea.horizontalCenter
-            font.pointSize: 24; font.bold: true
+            font.pointSize: 36; font.bold: true
 
             MouseArea { id: mouseArea; anchors.fill: parent }
 
-            states: State {
-                  name: "down"; when: mouseArea.pressed == true
-                  PropertyChanges { target: helloText; y: 160; rotation: 180; color: "red" }
+            states: State
+            {
+                  name: "down";
+                  when: mouseArea.pressed == true
+                  PropertyChanges
+                  {
+                      target: helloText;
+                      y: 300;
+                      //font.pointSize: 50;
+                      //font.capitalization: Font.SmallCaps
+                      rotation: 180;
+                      color: "red"
+                  }
             }
 
-            transitions: Transition {
-                  from: ""; to: "down"; reversible: true
-                  ParallelAnimation {
-                       NumberAnimation { properties: "y,rotation"; duration: 500; easing.type: Easing.InOutQuad }
-                       ColorAnimation { duration: 500 }
+            transitions: Transition
+            {
+                  from: "";
+                  to: "down";
+                  reversible: true
+                  ParallelAnimation
+                  {
+                       NumberAnimation
+                       {
+                           properties: "y,rotation";
+                           duration: 800;
+                           easing.type: Easing.OutElastic
+                       }
+
+                       ColorAnimation { duration: 800 }
                   }
             }
         }

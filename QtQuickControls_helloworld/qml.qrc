@@ -14,5 +14,6 @@
         <file>images/resize.png</file>
         <file>TitleBar.qml</file>
         <file>pointSketch.js</file>
+        <file>Element.qml</file>
     </qresource>
 </RCC>
