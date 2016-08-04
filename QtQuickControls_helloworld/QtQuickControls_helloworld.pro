@@ -6,7 +6,8 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     hellocppworld.cpp \
-    qtwr_hellocppworld.cpp
+    qtwr_hellocppworld.cpp \
+    qelement2d.cpp
 
 RESOURCES += qml.qrc
 
@@ -20,4 +21,5 @@ DISTFILES +=
 
 HEADERS += \
     hellocppworld.h \
-    qtwr_hellocppworld.h
+    qtwr_hellocppworld.h \
+    qelement2d.h
