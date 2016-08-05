@@ -5,7 +5,7 @@
 
 QElement2d::QElement2d(QQuickItem *parent)
         : QQuickItem(parent)
-        , m_p1(0, 0)
+        , m_p1(0, 0)    // Normalised standard values
         , m_p2(1, 1)
     {
         setFlag(ItemHasContents, true);
@@ -53,7 +53,7 @@ QSGNode *QElement2d::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
         node->setFlag(QSGNode::OwnsGeometry);
 
         QSGFlatColorMaterial *material = new QSGFlatColorMaterial;
-        material->setColor(QColor(255, 0, 0));
+        material->setColor(QColor(84, 191, 227));
         node->setMaterial(material);
         node->setFlag(QSGNode::OwnsMaterial);
     } else {
@@ -70,7 +70,7 @@ QSGNode *QElement2d::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
     vertices[0].set(x, y);    // Set node 1
 
     x = bounds.x() + m_p2.x() * bounds.width();
-    y = bounds.y() + m_p2.y() * bounds.width();
+    y = bounds.y() + m_p2.y() * bounds.height();
     vertices[1].set(x, y);    // Set node 2
     node->markDirty(QSGNode::DirtyGeometry);
 

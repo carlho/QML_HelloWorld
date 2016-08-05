@@ -7,6 +7,7 @@ var node            // Actual node
 // Element variables
 var creatingElement = false;
 var line
+var elements = [];
 
 function addNode(x, y) {
 
@@ -51,27 +52,22 @@ function drawElement(x, y){
 
     // Create first point of element
     if (!creatingElement){
+        line = 0                    // Reset line
 
-        line = 0
+        addElement2d(x, y, x, y);   // Add element at coordinates. x2 and y2 will be set later
 
-        // Draw line with start of line at x, y
-        // and end of line at mouse
-
-        addElement2d(x, y, x+20, y+20);
-
-        creatingElement = true;
+        creatingElement = true;     // Flag for element creation in progress
     }
 
     // Create second point of element
     else{
         line.elemP2(x,y);
-
-
-        //creatingElement = false;
     }
 }
 
-function finishElementCreation(){
+function finishElementCreation(x, y){
+    line.elemP2(x,y);
+    elements.push(line);
     creatingElement = false;
 }
 

@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import CustomGeometry 1.0
 
-Rectangle {
+Item {
     id: element2d
 
     property int x1: 0
@@ -16,14 +16,18 @@ Rectangle {
 
     Element2d
     {
-            id: elem
-            anchors.fill: parent
+        id: elem
+        anchors.fill: parent
     }
 
-        function elemP2(x, y)
-        {
-            element2d.x2 = x;
-            element2d.y2 = y;
-            //elem.p2 = Qt.point(1,1);
+    function elemP2(x, y)
+    {
+        //elem.x2 = x;
+        //elem.y2 = y;
+
+        element2d.x2 = x;
+        element2d.y2 = y;
+
+        //elem.p2 = Qt.point(1,1);
     }
 }

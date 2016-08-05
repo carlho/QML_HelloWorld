@@ -133,6 +133,11 @@ ApplicationWindow {
 
             // Add node
             onClicked: {
+                // If wanting to finish creating an an element
+                if (PointSketch.creatingElement)
+                {
+                    PointSketch.finishElementCreation(mouseX, mouseY)
+                }
 
                 PointSketch.addNode(mouseX, mouseY)
             }
