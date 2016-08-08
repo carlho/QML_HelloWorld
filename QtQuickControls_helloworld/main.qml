@@ -72,48 +72,20 @@ ApplicationWindow {
         }
 
     // This is the main window
-    MainWindow
+    DrawingArea
     {
-
+        width: parent.width*3/4
+        height: parent.height
     }
 
-
-    Rectangle {
-        id: right
+    // The right panel
+    RightPanel
+    {
         x: parent.width*3/4
         width: parent.width/4
         height: parent.height
-
-        
-        color: "darkgrey"
-
-        Rectangle{
-            id: smallRect
-            width: parent.width/5
-            height: width
-            x: parent.width/2 - width/2
-            y: 10
-            color: "red"
-
-            NumberAnimation on y{
-                from: 10; to: 200
-                duration: 1000
-            }
-
-            MouseArea{
-                anchors.fill: parent
-
-                onClicked: {
-                    parent.y = 10
-                }
-            }
-        }
-
-
-        MouseArea{
-            anchors.fill: parent
-        }
     }
+
 
     Item {
         id: rootItem

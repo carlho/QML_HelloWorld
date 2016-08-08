@@ -15,6 +15,7 @@
         <file>TitleBar.qml</file>
         <file>pointSketch.js</file>
         <file>Element.qml</file>
-        <file>MainWindow.qml</file>
+        <file>RightPanel.qml</file>
+        <file>DrawingArea.qml</file>
     </qresource>
 </RCC>
