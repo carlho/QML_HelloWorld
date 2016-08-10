@@ -82,6 +82,7 @@ ApplicationWindow {
     RightPanel
     {
         x: parent.width*3/4
+        y: 30
         width: parent.width/4
         height: parent.height
     }
