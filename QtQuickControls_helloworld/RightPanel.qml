@@ -39,37 +39,6 @@ Rectangle {
         }
     }
 
-    /*
-    TabView {
-        id: smallRect
-        width: parent.width
-        height: 100//parent.height
-        //border.width: 5
-
-        style: TabViewStyle {
-            property color frameColor: "#999"
-            property color fillColor: "#eee"
-            frameOverlap: 0
-        }
-
-
-        y: 30
-        Tab {
-            title: "Red"
-            Rectangle { color: "red" }
-        }
-        Tab {
-            title: "Blue"
-            Rectangle { color: "blue" }
-        }
-        Tab {
-            title: "Green"
-            Rectangle { color: "green" }
-        }
-    }
-    */
-
-
 
 
     /* CARLS ANIMATED RECTANGLE
@@ -97,7 +66,9 @@ Rectangle {
     */
 
 
+    /*
     MouseArea{
         anchors.fill: parent
     }
+    */
 }
