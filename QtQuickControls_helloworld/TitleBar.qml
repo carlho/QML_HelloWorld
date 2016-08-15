@@ -94,7 +94,7 @@ Rectangle {
                 id: minimizeArea
                 anchors.fill: parent
                 onClicked: {
-                    appWindow.visibility = Window.Minimized
+                    mainWindow.visibility = Window.Minimized
                 }
             }
         }
