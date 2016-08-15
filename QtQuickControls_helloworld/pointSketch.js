@@ -7,18 +7,18 @@ var node            // Actual node
 // Element variables
 var creatingElement = false;
 var continuousElementCreation = false;
-var line
+var line;
+var elem;
 var elements = [];
 
 
 
 function abortCommand()
 {
-    // Stop drawing an element
-    creatingElement = false;
+    if(creatingElement)
+        abortCreatingElement();
 
-
-    continuousElementCreation = false;
+    // Add abort actions for other events here
 }
 
 
@@ -54,17 +54,17 @@ function addNode(x, y) {
     nodes.push(node);
 }
 
-
 function doStuffAtNodeClick(){
     node.width = 30;
 }
 
 
 
-function drawElement(x, y){
-
-    // Create first point of element
-    if (!creatingElement){
+function drawElement(x, y)
+{
+    // If drawing element first time create element and the first node
+    if (!creatingElement)
+    {
         line = 0                    // Reset line
 
         addElement2d(x, y, x, y);   // Add element at coordinates. x2 and y2 will be set later
@@ -72,19 +72,12 @@ function drawElement(x, y){
         creatingElement = true;     // Flag for element creation in progress
     }
 
-    // Create second point of element
-    else{
+    // Update secont point of the element
+    else
+    {
         line.elemP2(x,y);
     }
 }
-
-function finishElementCreation(x, y){
-    line.elemP2(x,y);
-    elements.push(line);
-    creatingElement = false;
-}
-
-
 
 function addElement2d(x1, y1, x2, y2) {
 
@@ -113,4 +106,18 @@ function addElement2d(x1, y1, x2, y2) {
             }
         }
     }
+}
+
+function finishElementCreation(x, y)
+{
+    line.elemP2(x,y);
+    elements.push(line);
+    creatingElement = false;
+}
+
+function abortCreatingElement()
+{
+    line.destroy();
+    creatingElement = false;
+    continuousElementCreation = false;
 }
