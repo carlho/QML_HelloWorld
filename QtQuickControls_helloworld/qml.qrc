@@ -17,5 +17,7 @@
         <file>Element.qml</file>
         <file>RightPanel.qml</file>
         <file>DrawingArea.qml</file>
+        <file>HorizontalLine.qml</file>
+        <file>Line.qml</file>
     </qresource>
 </RCC>

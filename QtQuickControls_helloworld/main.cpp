@@ -4,6 +4,7 @@
 #include <QGuiApplication>
 #include "qtwr_hellocppworld.h"
 #include "qelement2d.h"
+#include "qcustomline.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +12,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<QtWr_HelloCppWorld>("Hello", 1, 0, "QtWr_HelloCppWorld");
     qmlRegisterType<QElement2d>("CustomGeometry", 1, 0, "Element2d");
+    qmlRegisterType<QCustomLine>("CustomGeometry", 1, 0, "CustomLine");
 
 /*
     QQuickView view;

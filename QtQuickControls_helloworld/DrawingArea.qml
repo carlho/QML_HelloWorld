@@ -9,6 +9,10 @@ import CustomGeometry 1.0
 Rectangle {
 
     id: drawArea
+
+    focus: true
+    Keys.onEscapePressed: PointSketch.abortCommand();
+
     gradient: Gradient{
         GradientStop{
             position: 0.0;
@@ -27,6 +31,70 @@ Rectangle {
         name: "Hello C++ World"
     }
 
+
+    // Rätt smutsigt, men orkar inte generera dem dynamiskt just nu...
+    Grid {
+        id: horizontalLines
+        anchors.fill: parent
+        columns: 1; spacing: 25
+
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+        Line { x: 0; width: drawArea.width; height: 1; }
+    }
+    Grid {
+        id: verticalLines
+        anchors.fill: parent
+        rows: 1; columns: 30; spacing: 25
+
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+        CustomLine { x: 0; height: drawArea.height; width: 1; }
+    }
 
     MouseArea {
         id: mouseAreaRect
@@ -56,70 +124,36 @@ Rectangle {
         }
         */
 
-        onPressAndHold:{
-            helloText.text = cppObject.name
-        }
+        onPressAndHold:{ helloText.text = cppObject.name }
 
-        onReleased: {helloText.text = "Hello world!"}
+        onReleased: { helloText.text = "Hello world!" }
 
 
         // Add node
-        onClicked: {
+        onClicked:
+        {
             // If wanting to finish creating an an element
             if (PointSketch.creatingElement)
             {
                 PointSketch.finishElementCreation(mouseX, mouseY)
             }
 
+            // Create node regardless of whether an element is being created or not
             PointSketch.addNode(mouseX, mouseY)
         }
 
 
     }
 
-    function doStuffTest(x, y){
-        PointSketch.drawElement(x, y)
-    }
-
-    Rectangle{
-        id: bounceRec
-        x: parent.x
-        y: parent.y
-        width: 80
-        height: 80
-
-        MouseArea { id: mouseArea2; anchors.fill: parent }
-
-        states: State
+    function doStuffTest(x, y)
+    {
+        if(PointSketch.creatingElement)
         {
-              name: "up2";
-              when: mouseArea2.pressed == true
-              PropertyChanges
-              {
-                  target: bounceRec;
-                  y: bounceRecItem.y-10;
-                  x: bounceRecItem.x+50;
-                  //rotation: 180;
-                  color: "blue"
-              }
+            PointSketch.finishElementCreation(x, y)
         }
-
-        transitions: Transition
+        else
         {
-              from: "";
-              to: "up2";
-              //reversible: true
-              ParallelAnimation
-              {
-                   NumberAnimation
-                   {
-                       properties: "y,rotation";
-                       duration: 800;
-                       easing.type: Easing.OutElastic
-                   }
-
-                   ColorAnimation { duration: 800 }
-              }
+            PointSketch.drawElement(x, y)
         }
     }
 

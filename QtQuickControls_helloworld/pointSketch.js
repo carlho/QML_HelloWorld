@@ -6,8 +6,21 @@ var node            // Actual node
 
 // Element variables
 var creatingElement = false;
+var continuousElementCreation = false;
 var line
 var elements = [];
+
+
+
+function abortCommand()
+{
+    // Stop drawing an element
+    creatingElement = false;
+
+
+    continuousElementCreation = false;
+}
+
 
 function addNode(x, y) {
 

@@ -71,7 +71,7 @@ ApplicationWindow {
             }
         }
 
-    // This is the main window
+    // This is the main drawing area
     DrawingArea
     {
         width: parent.width*3/4

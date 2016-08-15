@@ -23,7 +23,8 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
 
-            onClicked: {
+            onClicked:
+            {
                 drawArea.doStuffTest(node.xPos, node.yPos);
             }
 
