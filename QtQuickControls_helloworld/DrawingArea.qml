@@ -25,13 +25,6 @@ Rectangle {
     }
 
 
-    QtWr_HelloCppWorld
-    {
-        id: cppObject
-        name: "Hello C++ World"
-    }
-
-
     // Rätt smutsigt, men orkar inte generera dem dynamiskt just nu...
     Grid {
         id: horizontalLines
@@ -96,6 +89,9 @@ Rectangle {
         CustomLine { x: 0; height: drawArea.height; width: 1; }
     }
 
+
+
+
     MouseArea {
         id: mouseAreaRect
         anchors.fill: parent
@@ -115,18 +111,6 @@ Rectangle {
                 PointSketch.drawElement(mouseX, mouseY)
             }
         }
-
-        /*
-        onExited:
-        {
-            parent.color = "lightgrey"
-            helloText.text = "Hello world!"
-        }
-        */
-
-        onPressAndHold:{ helloText.text = cppObject.name }
-
-        onReleased: { helloText.text = "Hello world!" }
 
 
         // Add node
@@ -156,65 +140,4 @@ Rectangle {
             PointSketch.drawElement(x, y)
         }
     }
-
-    Text {
-        id: helloText
-        text: "Hello world!"
-        y: 30
-        anchors.horizontalCenter: drawArea.horizontalCenter
-        font.pointSize: 36; font.bold: true
-
-        MouseArea { id: mouseArea; anchors.fill: parent }
-
-        states: State
-        {
-              name: "down";
-              when: mouseArea.pressed == true
-              PropertyChanges
-              {
-                  target: helloText;
-                  y: 300;
-                  //font.pointSize: 50;
-                  //font.capitalization: Font.SmallCaps
-                  rotation: 180;
-                  color: "red"
-              }
-        }
-
-        transitions: Transition
-        {
-              from: "";
-              to: "down";
-              reversible: true
-              ParallelAnimation
-              {
-                   NumberAnimation
-                   {
-                       properties: "y,rotation";
-                       duration: 800;
-                       easing.type: Easing.OutElastic
-                   }
-
-                   ColorAnimation { duration: 800 }
-              }
-        }
-    }
-
-
-
-    Grid {
-        id: colorPicker
-        x: 4; anchors.bottom: drawArea.bottom; anchors.bottomMargin: 4
-        rows: 2; columns: 3; spacing: 3
-
-        Cell { cellColor: "red"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "green"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "blue"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "yellow"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "steelblue"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "black"; onClicked: helloText.color = cellColor }
-    }
-
-
-
 }
