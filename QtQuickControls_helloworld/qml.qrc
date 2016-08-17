@@ -19,5 +19,6 @@
         <file>DrawingArea.qml</file>
         <file>HorizontalLine.qml</file>
         <file>Line.qml</file>
+        <file>StandardPsButton.qml</file>
     </qresource>
 </RCC>
