@@ -20,5 +20,6 @@
         <file>HorizontalLine.qml</file>
         <file>Line.qml</file>
         <file>StandardPsButton.qml</file>
+        <file>BottomPanel.qml</file>
     </qresource>
 </RCC>
