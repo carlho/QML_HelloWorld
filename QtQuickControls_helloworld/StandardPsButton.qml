@@ -1,12 +1,12 @@
 import QtQuick 2.0
 
 Item {
-
         id: button
         width: 100
         height: 100
         anchors.fill: parent
         property alias buttonText: innerText.text;
+        property int testVal: 100
         property color color: "white"
         property color hoverColor: "#aaaaaa"
         property color pressColor: "slategray"
@@ -28,7 +28,7 @@ Item {
         //Rectangle to draw the button
         Rectangle {
             width: frame.width / 3
-            height: 50
+            height: testVal
             x: 80
             y: 80
             id: rectangleButton
