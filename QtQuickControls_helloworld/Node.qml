@@ -35,7 +35,10 @@ Item {
         border.width: 1
         radius: width*0.5
 
-
+        function createElementFromNode()
+        {
+            drawArea.nodeClickedDuringElementCreation(node.xPos, node.yPos);
+        }
 
         MouseArea
         {
@@ -45,7 +48,7 @@ Item {
 
             onClicked:
             {
-                drawArea.beginCreatingElementFromNode(node.xPos, node.yPos);
+                circle.createElementFromNode();
             }
 
 

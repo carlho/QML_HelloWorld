@@ -19,10 +19,17 @@ Rectangle {
             if (event.key === Qt.Key_N)
             {
                 PointSketch.creatingNode = true;
+                PointSketch.status = PointSketch.StatusEnum.CreateNode;
             }
             else if (event.key === Qt.Key_L)
             {
+                PointSketch.continuousElementCreation = false;
+                PointSketch.status = PointSketch.StatusEnum.CreateElement1
+            }
+            else if (event.key === Qt.Key_P)
+            {
                 PointSketch.continuousElementCreation = true;
+                PointSketch.status = PointSketch.StatusEnum.CreateElement1
             }
         }
 
@@ -119,7 +126,7 @@ Rectangle {
 
         onPositionChanged:
         {
-            if (PointSketch.creatingElement)
+            if (PointSketch.status === PointSketch.StatusEnum.CreateElement2)
             {
                 PointSketch.drawElement(mouseX, mouseY)
             }
@@ -130,13 +137,15 @@ Rectangle {
         onClicked:
         {
             // If wanting to finish creating an an element
-            if (PointSketch.creatingElement)
+            if (PointSketch.status === PointSketch.StatusEnum.CreateElement2)
             {
-                PointSketch.finishElementCreation(mouseX, mouseY)
                 PointSketch.addNode(mouseX, mouseY)
-                beginCreatingElementFromNode(mouseX, mouseY)
+
+                PointSketch.finishElementCreation(mouseX, mouseY)
+
+
             }
-            else if(PointSketch.creatingNode == true)
+            else if(PointSketch.status === PointSketch.StatusEnum.CreateNode)
             {
                 PointSketch.addNode(mouseX, mouseY)
             }
@@ -145,19 +154,13 @@ Rectangle {
 
     }
 
-    function beginCreatingElementFromNode(x, y)
+    function nodeClickedDuringElementCreation(x, y)
     {
-        if (PointSketch.continuousElementCreation)
-        {
-            if(PointSketch.creatingElement)
+            if(PointSketch.status === PointSketch.StatusEnum.CreateElement2)
             {
                 PointSketch.finishElementCreation(x, y)
-                PointSketch.drawElement(x, y)
             }
-            else
-            {
-                PointSketch.drawElement(x, y)
-            }
-        }
+
+            PointSketch.drawElement(x, y)
     }
 }
