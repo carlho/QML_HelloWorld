@@ -71,11 +71,13 @@ ApplicationWindow {
             }
         }
 
+    property var bottomPanelHieght : 40
+
     // This is the main drawing area
     DrawingArea
     {
         width: parent.width*3/4
-        height: parent.height
+        height: parent.height-bottomPanelHieght
     }
 
     // The right panel
@@ -84,9 +86,16 @@ ApplicationWindow {
         x: parent.width*3/4
         y: 30
         width: parent.width/4
-        height: parent.height
+        height: parent.height-bottomPanelHieght
     }
 
+    //The bootom panel
+    BottomPanel
+    {
+        y: parent.height-bottomPanelHieght
+        width: parent.width
+        height: bottomPanelHieght
+    }
 
     Item {
         id: rootItem
