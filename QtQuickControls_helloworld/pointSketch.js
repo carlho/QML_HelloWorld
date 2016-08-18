@@ -1,6 +1,7 @@
 /* This scrips file handles pointsketch logic */
 
 // Node variables
+var creatingNode = false;
 var nodes = [];     // List of nodes on canvas
 var node            // Actual node
 
@@ -30,6 +31,9 @@ function abortCommand()
 {
     if(creatingElement)
         abortCreatingElement();
+
+    // Stop creating nodes
+    creatingNode = false;
 
     // Add abort actions for other events here
 }

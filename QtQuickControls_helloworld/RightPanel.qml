@@ -18,6 +18,9 @@ Rectangle {
             title: "Draw"
 
             StandardPsButton{
+                buttonText: "node"
+                testVal: 200
+
             }
 
 

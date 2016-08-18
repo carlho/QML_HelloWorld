@@ -16,9 +16,7 @@ ApplicationWindow {
     title: qsTr("Hello World")
     flags: Qt.FramelessWindowHint //suppresses the standard windows frame
 
-
     menuBar: MenuBar {
-
             Menu {
                 title: qsTr("File")
                 MenuItem {
