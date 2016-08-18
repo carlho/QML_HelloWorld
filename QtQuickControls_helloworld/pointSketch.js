@@ -48,13 +48,18 @@ var StatusEnum = {
 //Sets the status variable to create node by default
 var status = StatusEnum.Ready;
 
+function updateStatus(newStatus)
+{
+    status = newStatus;
+    bottom.updateStatusText();
+}
 
 function abortCommand()
 {
     if(status === StatusEnum.CreateElement2)
         abortCreatingElement();
 
-    status = StatusEnum.Ready;
+    updateStatus(StatusEnum.Ready);
     // Add abort actions for other events here
 }
 
@@ -105,7 +110,7 @@ function drawElement(x, y)
         addElement2d(x, y, x, y);   // Add element at coordinates. x2 and y2 will be set later
 
         //creatingElement = true;     // Flag for element creation in progress
-        status = StatusEnum.CreateElement2;
+        updateStatus(StatusEnum.CreateElement2);
     }
 
     // Update secont point of the element
@@ -150,17 +155,17 @@ function finishElementCreation(x, y)
     elements.push(line);
     if (continuousElementCreation)
     {
-        status = StatusEnum.CreateElement1;
+        updateStatus(StatusEnum.CreateElement1);
         drawElement(x,y);
         //node.createElementFromNode();
     }
     else
-        status = StatusEnum.Ready;
+        updateStatus(StatusEnum.Ready);
 }
 
 function abortCreatingElement()
 {
     line.destroy();
-    status = StatusEnum.Ready;
+    updateStatus(StatusEnum.Ready);
     continuousElementCreation = false;
 }
