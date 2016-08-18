@@ -2,18 +2,22 @@ import QtQuick 2.0
 
 Item {
         id: button
-        width: 100
-        height: 100
-        anchors.fill: parent
+        //width: 100
+        //height: 100
+        //anchors.fill: parent
         property alias buttonText: innerText.text;
-        property int testVal: 100
-        property color color: "white"
-        property color hoverColor: "#aaaaaa"
-        property color pressColor: "slategray"
+        property int btnHeight : 100
+        property int btnWidth: 100
+        property int xPos: 0
+        property int yPos: 0
+
+        //property color color: "white"
+        //property color hoverColor: "#aaaaaa"
+        //property color pressColor: "slategray"
         property int fontSize: 10
-        property int borderWidth: 0
-        property int borderRadius: 2
-        scale: state === "Pressed" ? 1.04 : 1.0//0.96 : 1.0
+        property int borderWidth: 2
+        property int borderRadius: 0
+        scale: state === "Pressed" ? 0.1 : 1.0//0.96 : 1.0
         onEnabledChanged: state = ""
         signal clicked
 
@@ -27,16 +31,16 @@ Item {
 
         //Rectangle to draw the button
         Rectangle {
-            width: frame.width / 3
-            height: testVal
-            x: 80
-            y: 80
+            width: btnWidth//frame.width / 3
+            height: btnHeight
+            x: xPos
+            y: yPos
             id: rectangleButton
             //anchors.fill: parent
             radius: borderRadius
             color: button.enabled ? "#202020" : "#505050"//button.color : "grey"
             border.width: borderWidth
-            border.color: "black"
+            border.color: "darkgrey"//"black"
 
             Text {
                 id: innerText

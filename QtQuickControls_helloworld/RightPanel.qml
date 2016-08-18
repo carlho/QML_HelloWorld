@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
+import "pointSketch.js" as PointSketch
 
 Rectangle {
     id: right
@@ -17,12 +18,43 @@ Rectangle {
         Tab {
             title: "Draw"
 
-            StandardPsButton{
-                buttonText: "node"
-                testVal: 200
+            Item{
+                StandardPsButton{
+                    id: btnPoint
+                    buttonText: "Point"
+                    btnWidth: parent.width / 2
+                    xPos: 0
+                    yPos: 30
+                    onClicked: PointSketch.createPointBtnClicked()
+                }
+
+                StandardPsButton{
+                    id: btnLine
+                    buttonText: "Line"
+                    xPos: parent.width / 2
+                    yPos: 30
+                    btnWidth: parent.width / 2
+                    onClicked: PointSketch.createLineBtnClicked()
+                }
+                StandardPsButton{
+                    id: btnPolyline
+                    buttonText: "PolyLine"
+                    btnWidth: parent.width / 2
+                    xPos: 0
+                    yPos: 30 + btnLine.btnHeight
+                    onClicked: PointSketch.createPolyLineBtnClicked()
+                }
+                StandardPsButton{
+                    id: btnAnchor
+                    buttonText: "Anchor"
+                    btnWidth: parent.width / 2
+                    xPos: parent.width / 2
+                    yPos: 30 + btnLine.btnHeight
+                    onClicked: PointSketch.createAnchorBtnClicked()
+                }
+
 
             }
-
 
 
 
