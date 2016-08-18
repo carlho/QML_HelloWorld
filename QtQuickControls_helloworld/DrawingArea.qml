@@ -19,17 +19,20 @@ Rectangle {
             if (event.key === Qt.Key_N)
             {
                 PointSketch.creatingNode = true;
-                PointSketch.status = PointSketch.StatusEnum.CreateNode;
+                PointSketch.updateStatus(PointSketch.StatusEnum.CreateNode);
+                //PointSketch.status = PointSketch.StatusEnum.CreateNode;
             }
             else if (event.key === Qt.Key_L)
             {
                 PointSketch.continuousElementCreation = false;
-                PointSketch.status = PointSketch.StatusEnum.CreateElement1
+                //PointSketch.status = PointSketch.StatusEnum.CreateElement1
+                PointSketch.updateStatus(PointSketch.StatusEnum.CreateElement1);
             }
             else if (event.key === Qt.Key_P)
             {
                 PointSketch.continuousElementCreation = true;
-                PointSketch.status = PointSketch.StatusEnum.CreateElement1
+                PointSketch.updateStatus(PointSketch.StatusEnum.CreateElement1);
+                //PointSketch.status = PointSketch.StatusEnum.CreateElement1
             }
         }
 
