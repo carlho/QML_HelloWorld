@@ -53,6 +53,19 @@ Rectangle {
                     onClicked: PointSketch.createAnchorBtnClicked()
                 }
 
+                StandardPsButton{
+                    id: btnAbort
+                    buttonText: "Abort Command"
+                    btnWidth: parent.width / 2
+                    btnHeight: 50
+                    xPos: 60//parent.width / 2 + btnAbort.width / 2
+                    yPos: 350//30 + btnLine.btnHeight
+                    onClicked: PointSketch.createAnchorBtnClicked()
+                }
+
+
+
+
 
             }
 
