@@ -10,8 +10,21 @@ Rectangle {
 
     id: drawArea
 
-    focus: true
+    focus: true // Sets the focus to this window
+
+    ////////// KEYS /////////
     Keys.onEscapePressed: PointSketch.abortCommand();
+
+    Keys.onPressed: {
+            if (event.key === Qt.Key_N)
+            {
+                PointSketch.creatingNode = true;
+            }
+            else if (event.key === Qt.Key_L)
+            {
+                PointSketch.continuousElementCreation = true;
+            }
+        }
 
     gradient: Gradient{
         GradientStop{
@@ -120,24 +133,31 @@ Rectangle {
             if (PointSketch.creatingElement)
             {
                 PointSketch.finishElementCreation(mouseX, mouseY)
+                PointSketch.addNode(mouseX, mouseY)
+                beginCreatingElementFromNode(mouseX, mouseY)
             }
-
-            // Create node regardless of whether an element is being created or not
-            PointSketch.addNode(mouseX, mouseY)
+            else if(PointSketch.creatingNode == true)
+            {
+                PointSketch.addNode(mouseX, mouseY)
+            }
         }
 
 
     }
 
-    function doStuffTest(x, y)
+    function beginCreatingElementFromNode(x, y)
     {
-        if(PointSketch.creatingElement)
+        if (PointSketch.continuousElementCreation)
         {
-            PointSketch.finishElementCreation(x, y)
-        }
-        else
-        {
-            PointSketch.drawElement(x, y)
+            if(PointSketch.creatingElement)
+            {
+                PointSketch.finishElementCreation(x, y)
+                PointSketch.drawElement(x, y)
+            }
+            else
+            {
+                PointSketch.drawElement(x, y)
+            }
         }
     }
 }

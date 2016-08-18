@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "pointSketch.js" as PointSketch
 
 Item {
     id: node
@@ -8,31 +9,54 @@ Item {
 
     width: 15; height: 15
 
+    Component.onCompleted:
+    {
+        node.sendCoordinates.connect(send)
+    }
+
+    function send(x, y)
+    {
+        if (PointSketch.creatingElement)
+        {
+            PointSketch.drawElement(mouseX, mouseY)
+        }
+    }
+
+    signal sendCoordinates(var x, var y)
+
     Rectangle {
         id: circle
         x: xPos-height/2
         y: yPos-width/2
         width: parent.width<parent.height?parent.width:parent.height
         height: width
-        color: "black"
+        color: "darkgrey"
         border.color: "black"
         border.width: 1
         radius: width*0.5
 
-        MouseArea {
+
+
+        MouseArea
+        {
+            id: mouseArea
             anchors.fill: parent
             hoverEnabled: true
 
             onClicked:
             {
-                drawArea.doStuffTest(node.xPos, node.yPos);
+                drawArea.beginCreatingElementFromNode(node.xPos, node.yPos);
             }
 
-            onEntered: {
+            onPositionChanged:
+            {
                 parent.color = "black"
+
+                sendCoordinates(mouseX, mouseY)
             }
 
-            onExited: {
+            onExited:
+            {
                 parent.color = "darkgrey"
             }
 

@@ -1,6 +1,7 @@
 /* This scrips file handles pointsketch logic */
 
 // Node variables
+var creatingNode = false;
 var nodes = [];     // List of nodes on canvas
 var node            // Actual node
 
@@ -27,11 +28,32 @@ function createAnchorBtnClicked(){
     console.log("Anchor btn clicked")
 }
 
+var StatusEnum = {
+    Ready: 1,
+    CreateNode: 2,
+    CreateElement: 3,
+    DeleteNode: 4,
+    DeleteElement: 5,
+    properties: {
+    1:{statusText: "Ready"},
+    2:{statusText: "Create a node"},
+    3:{statusText: "Create an element"},
+    4:{statusText: "Delete a node"},
+    5:{statusText: "Delete an element"}
+    }
+};
+
+//Sets the status variable to create node by default
+var status = StatusEnum.CreateNode;
+
 
 function abortCommand()
 {
     if(creatingElement)
         abortCreatingElement();
+
+    // Stop creating nodes
+    creatingNode = false;
 
     // Add abort actions for other events here
 }
