@@ -12,6 +12,21 @@ var line;
 var elem;
 var elements = [];
 
+function createPointBtnClicked(){
+    console.log("Point btn clicked")
+}
+
+function createLineBtnClicked(){
+    console.log("Line btn clicked")
+}
+
+function createPolyLineBtnClicked(){
+    console.log("Polyline btn clicked")
+}
+
+function createAnchorBtnClicked(){
+    console.log("Anchor btn clicked")
+}
 
 var StatusEnum = {
     Ready: 1,
