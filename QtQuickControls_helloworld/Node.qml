@@ -35,7 +35,10 @@ Item {
         border.width: 1
         radius: width*0.5
 
-
+        function createElementFromNode()
+        {
+            drawArea.nodeClickedDuringElementCreation(node.xPos, node.yPos);
+        }
 
         MouseArea
         {
@@ -45,12 +48,14 @@ Item {
 
             onClicked:
             {
-                drawArea.beginCreatingElementFromNode(node.xPos, node.yPos);
+                circle.createElementFromNode();
             }
+
+
 
             onPositionChanged:
             {
-                parent.color = "black"
+                //parent.color = "black"
 
                 sendCoordinates(mouseX, mouseY)
             }
@@ -62,5 +67,21 @@ Item {
 
             onDoubleClicked: node.destroy()
         }
+
+        //////////// STATES ////////////
+
+        states: State {
+                    name: "hovered"; when: mouseArea.onEntered;
+                    PropertyChanges { target: circle; color: "black" }
+                }
+
+        Transition {
+                from: "*"; to: "hovered"
+                ColorAnimation {
+                    from: circle.color
+                    to: "black"
+                    duration: 200 }
+                reversible: true
+            }
     }
 }

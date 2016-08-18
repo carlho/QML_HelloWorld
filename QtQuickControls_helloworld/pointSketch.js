@@ -31,30 +31,30 @@ function createAnchorBtnClicked(){
 var StatusEnum = {
     Ready: 1,
     CreateNode: 2,
-    CreateElement: 3,
-    DeleteNode: 4,
-    DeleteElement: 5,
+    CreateElement1: 3,
+    CreateElement2: 4,
+    DeleteNode: 5,
+    DeleteElement: 6,
     properties: {
     1:{statusText: "Ready"},
     2:{statusText: "Create a node"},
     3:{statusText: "Create an element"},
-    4:{statusText: "Delete a node"},
-    5:{statusText: "Delete an element"}
+    4:{statusText: "Create an element 2"},
+    5:{statusText: "Delete a node"},
+    6:{statusText: "Delete an element"}
     }
 };
 
 //Sets the status variable to create node by default
-var status = StatusEnum.CreateNode;
+var status = StatusEnum.Ready;
 
 
 function abortCommand()
 {
-    if(creatingElement)
+    if(status === StatusEnum.CreateElement2)
         abortCreatingElement();
 
-    // Stop creating nodes
-    creatingNode = false;
-
+    status = StatusEnum.Ready;
     // Add abort actions for other events here
 }
 
@@ -91,26 +91,25 @@ function addNode(x, y) {
     nodes.push(node);
 }
 
-function doStuffAtNodeClick(){
-    node.width = 30;
-}
+
 
 
 
 function drawElement(x, y)
 {
-    // If drawing element first time create element and the first node
-    if (!creatingElement)
+    // If drawing element first time create element and the first point of it
+    if (status === StatusEnum.CreateElement1)
     {
-        line = 0                    // Reset line
+        line = 0;                   // Reset line
 
         addElement2d(x, y, x, y);   // Add element at coordinates. x2 and y2 will be set later
 
-        creatingElement = true;     // Flag for element creation in progress
+        //creatingElement = true;     // Flag for element creation in progress
+        status = StatusEnum.CreateElement2;
     }
 
     // Update secont point of the element
-    else
+    else if (status === StatusEnum.CreateElement2)
     {
         line.elemP2(x,y);
     }
@@ -149,12 +148,19 @@ function finishElementCreation(x, y)
 {
     line.elemP2(x,y);
     elements.push(line);
-    creatingElement = false;
+    if (continuousElementCreation)
+    {
+        status = StatusEnum.CreateElement1;
+        drawElement(x,y);
+        //node.createElementFromNode();
+    }
+    else
+        status = StatusEnum.Ready;
 }
 
 function abortCreatingElement()
 {
     line.destroy();
-    creatingElement = false;
+    status = StatusEnum.Ready;
     continuousElementCreation = false;
 }
