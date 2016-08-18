@@ -11,20 +11,25 @@ var continuousElementCreation = false;
 var line;
 var elem;
 var elements = [];
-var status = StatusEnum.CreateNode;
+
 
 var StatusEnum = {
-    CreateNode: 1,
-    CreateElement: 2,
-    DeleteNode: 3,
-    DeleteElement: 4,
+    Ready: 1,
+    CreateNode: 2,
+    CreateElement: 3,
+    DeleteNode: 4,
+    DeleteElement: 5,
     properties: {
-    1:{statusText: "Create a node"},
-    2:{statusText: "Create an element"},
-    3:{statusText: "Delete a node"},
-    4:{statusText: "Delete an element"}
+    1:{statusText: "Ready"},
+    2:{statusText: "Create a node"},
+    3:{statusText: "Create an element"},
+    4:{statusText: "Delete a node"},
+    5:{statusText: "Delete an element"}
     }
 };
+
+//Sets the status variable to create node by default
+var status = StatusEnum.CreateNode;
 
 
 function abortCommand()
