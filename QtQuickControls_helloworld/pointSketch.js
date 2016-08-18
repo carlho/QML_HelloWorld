@@ -29,7 +29,7 @@ var StatusEnum = {
 };
 
 //Sets the status variable to create node by default
-var status = StatusEnum.CreateNode;
+var status = StatusEnum.Ready;
 
 
 function abortCommand()
