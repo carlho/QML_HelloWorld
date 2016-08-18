@@ -10,7 +10,20 @@ var continuousElementCreation = false;
 var line;
 var elem;
 var elements = [];
+var status = StatusEnum.CreateNode;
 
+var StatusEnum = {
+    CreateNode: 1,
+    CreateElement: 2,
+    DeleteNode: 3,
+    DeleteElement: 4,
+    properties: {
+    1:{statusText: "Create a node"},
+    2:{statusText: "Create an element"},
+    3:{statusText: "Delete a node"},
+    4:{statusText: "Delete an element"}
+    }
+};
 
 
 function abortCommand()
