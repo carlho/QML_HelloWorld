@@ -90,6 +90,7 @@ ApplicationWindow {
     //The bootom panel
     BottomPanel
     {
+        x:0
         y: parent.height-bottomPanelHieght
         width: parent.width
         height: bottomPanelHieght
