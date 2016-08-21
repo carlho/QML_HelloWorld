@@ -160,9 +160,9 @@ Rectangle {
 
         function adjustZoom()
         {
-            if(drawArea.zoom*drawArea.width < parent.parent.width)
+            if(drawArea.zoom< 0.1)
             {
-                drawArea.zoom = parent.parent.width/drawArea.width;
+                drawArea.zoom= 0.1
             }
         }
         hoverEnabled: true
