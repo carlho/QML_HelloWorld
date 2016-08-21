@@ -126,7 +126,9 @@ Rectangle {
 
         acceptedButtons: Qt.Wheel
         onWheel: {
-        drawArea.zoom += wheel.angleDelta.y/800
+            if(wheel.modifiers & Qt.ControlModifier){
+                drawArea.zoom += wheel.angleDelta.y/800
+            }
         // you need to tweak factor above yourself.
         // 800 works for me, but might not be ok for you.
         }
