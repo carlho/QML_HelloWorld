@@ -129,6 +129,13 @@ Rectangle {
             if(wheel.modifiers & Qt.ControlModifier){
                 drawArea.zoom += wheel.angleDelta.y/800
             }
+            else if (wheel.modifiers & Qt.ShiftModifier){
+                drawArea.x +=  wheel.angleDelta.y
+            }
+            else{
+                drawArea.y +=  wheel.angleDelta.y
+            }
+
         // you need to tweak factor above yourself.
         // 800 works for me, but might not be ok for you.
         }
