@@ -14,14 +14,20 @@ var elements = [];
 
 function createPointBtnClicked(){
     console.log("Point btn clicked")
+    //creatingNode = true;
+    updateStatus(StatusEnum.CreateNode);
 }
 
 function createLineBtnClicked(){
     console.log("Line btn clicked")
+    continuousElementCreation = false;
+    updateStatus(StatusEnum.CreateElement1);
 }
 
 function createPolyLineBtnClicked(){
     console.log("Polyline btn clicked")
+    continuousElementCreation = true;
+    updateStatus(StatusEnum.CreateElement1);
 }
 
 function createAnchorBtnClicked(){
