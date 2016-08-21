@@ -70,12 +70,16 @@ ApplicationWindow {
         }
 
     property var bottomPanelHieght : 40
-
+    property var canvasSize : 60000
     // This is the main drawing area
     DrawingArea
     {
-        width: parent.width*3/4
-        height: parent.height-bottomPanelHieght
+        width: canvasSize
+        height: canvasSize
+        x: -canvasSize/2
+        y: -canvasSize/2
+        //width: parent.width*3/4
+        //height: parent.height-bottomPanelHieght
     }
 
     // The right panel

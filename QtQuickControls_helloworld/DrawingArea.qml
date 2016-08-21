@@ -124,22 +124,47 @@ Rectangle {
         anchors.fill: parent
 
 
-        acceptedButtons: Qt.Wheel
+        //acceptedButtons: Qt.Wheel
         onWheel: {
             if(wheel.modifiers & Qt.ControlModifier){
-                drawArea.zoom += wheel.angleDelta.y/800
+                drawArea.zoom += wheel.angleDelta.y/1500
+
+                adjustZoom()
+                adjustXcoordinate()
+                adjustYcoordinate()
+
             }
             else if (wheel.modifiers & Qt.ShiftModifier){
                 drawArea.x +=  wheel.angleDelta.y
+                adjustXcoordinate()
             }
             else{
                 drawArea.y +=  wheel.angleDelta.y
+                adjustYcoordinate()
             }
 
         // you need to tweak factor above yourself.
         // 800 works for me, but might not be ok for you.
         }
+        function adjustXcoordinate()
+        {
+            if(drawArea.x-drawArea.width/2*(drawArea.zoom-1.0) >0)
+                drawArea.x=drawArea.width/2*(drawArea.zoom-1.0)
+        }
 
+        function adjustYcoordinate()
+        {
+            if(drawArea.y-drawArea.height/2*(drawArea.zoom-1.0) >0)
+                drawArea.y=drawArea.height/2*(drawArea.zoom-1.0)
+        }
+
+        function adjustZoom()
+        {
+            if(drawArea.zoom*drawArea.width < parent.parent.width)
+            {
+                drawArea.zoom = parent.parent.width/drawArea.width;
+            }
+        }
         hoverEnabled: true
 
         onEntered:
