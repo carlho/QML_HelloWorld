@@ -10,6 +10,10 @@ Rectangle {
 
     id: drawArea
 
+    //Test to implement zooming capability
+    property real zoom: 1.0
+    scale: zoom
+
     focus: true // Sets the focus to this window
 
     ////////// KEYS /////////
@@ -116,6 +120,13 @@ Rectangle {
         id: mouseAreaRect
         anchors.fill: parent
 
+
+        acceptedButtons: Qt.Wheel
+        onWheel: {
+        drawArea.zoom += wheel.angleDelta.y/800
+        // you need to tweak factor above yourself.
+        // 800 works for me, but might not be ok for you.
+        }
 
         hoverEnabled: true
 

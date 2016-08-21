@@ -51,7 +51,7 @@ var status = StatusEnum.Ready;
 function updateStatus(newStatus)
 {
     status = newStatus;
-    bottom.updateStatusText();
+    //bottom.updateStatusText();
 }
 
 function abortCommand()
